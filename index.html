@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="koruk" >
+	<head>
+		<base href="/" />
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Koruk Tekstil - Toptan ve Perakende Satış</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/ng-scrollbar.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/app.css">
+		<link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,700" rel="stylesheet">
+	</head>
+	<body ng-controller="bodyController">
+		<div class="content-ng" ng-view autoscroll="true"></div>
+		<div id="logo" ng-click="gotoPage('/')"></div>
+		<div id="nav">
+			<ul>
+				<li><a href="/">ANASAYFA</a></li>
+				<li><a href="/koleksiyon">KOLEKSİYON</a></li>
+				<li><a href="/iletisim">İLETİŞİM</a></li>
+			</ul>
+		</div>
+
+	     <script src="app/js/angular.min.js"></script>
+	     <script src="app/js/angular-route.min.js"></script>
+	     <script src="app/js/ng-scrollbar.min.js"></script>
+	     <script src="assets/js/app.js"></script>
+	</body>
+</html>

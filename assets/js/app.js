@@ -6,12 +6,12 @@ angular.module('koruk',[
         $locationProvider.html5Mode(true).hashPrefix('!');
 
   		$routeProvider.when('/', {
-			templateUrl: 'views/anasayfa.html'
+			templateUrl: 'views/anasayfa.html?v20170326'
 		}).when('/koleksiyon', {
-			templateUrl: 'views/koleksiyon.html',
+			templateUrl: 'views/koleksiyon.html?v20170326',
 			controller:'collectionController'
 		}).when('/iletisim', {
-			templateUrl: 'views/iletisim.html'
+			templateUrl: 'views/iletisim.html?v20170327'
 		}).when('/404', {
 			templateUrl: 'views/404.html'
 		}).otherwise({redirectTo: '/404'});
@@ -63,8 +63,7 @@ angular.module('koruk',[
 				{'image':'/collection/item29.jpg','cost':'0,00 TL','text':'Dress Name'},
 				{'image':'/collection/item30.jpg','cost':'0,00 TL','text':'Dress Name'},
 				{'image':'/collection/item31.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item32.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item33.jpg','cost':'0,00 TL','text':'Dress Name'}
+				{'image':'/collection/item32.jpg','cost':'0,00 TL','text':'Dress Name'}
 			];
 
 			$scope.selectedItemIndex=0;
@@ -85,7 +84,7 @@ angular.module('koruk',[
 			$scope.swipeAction=function(event){
 				switch(event.direction){
 					case 2:
-						if($scope.selectedItemIndex>$scope.itemList.length) return;
+						if($scope.selectedItemIndex==$scope.itemList.length-1) return;
 						$scope.selectThis($scope.selectedItemIndex+1);
 						break;
 					case 4:

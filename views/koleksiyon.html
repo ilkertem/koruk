@@ -1,6 +1,6 @@
-<div class="collection">
+<div class="collection" hm-swipe="swipeAction($event)">
 	<div class="collection-body" style="width: {{itemList.length * 200 + 50}}px; margin-left:{{galleryLeft}}px">
-		<div class="collection-item" ng-repeat="item in itemList" ng-class="{'selected':selectedItem==item}" ng-click="selectThis(item,$index)" style="background-image: url(/assets/img{{item.image}})">
+		<div class="collection-item" ng-repeat="item in itemList" ng-class="{'selected':selectedItem==item}" ng-click="selectThis($index)" style="background-image: url(/assets/img{{item.image}})">
 			<p>{{item.cost}}<br>
 			{{item.text}}
 			</p>

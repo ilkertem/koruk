@@ -14,6 +14,7 @@
 	<body ng-controller="bodyController">
 		<div class="content-ng" ng-view autoscroll="true"></div>
 		<div id="logo" ng-click="gotoPage('/')"></div>
+		<div id="mobilelogo" ng-click="gotoPage('/')"></div>
 		<div id="nav">
 			<ul>
 				<li><a href="/">ANASAYFA</a></li>
@@ -24,7 +25,8 @@
 
 	     <script src="app/js/angular.min.js"></script>
 	     <script src="app/js/angular-route.min.js"></script>
-	     <script src="app/js/ng-scrollbar.min.js"></script>
+	     <script src="app/js/hammer.min.js"></script>
+	     <script src="app/js/angular-gestures.min.js"></script>
 	     <script src="assets/js/app.js"></script>
 	</body>
 </html>

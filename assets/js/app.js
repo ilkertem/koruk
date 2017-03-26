@@ -1,7 +1,7 @@
 angular.module('koruk',[
 	'ngRoute',
-	'ngScrollbar'
-	]).config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
+	'angular-gestures'
+	]).config(['$routeProvider', '$locationProvider', '$httpProvider','hammerDefaultOptsProvider', function($routeProvider, $locationProvider, $httpProvider,hammerDefaultOptsProvider) {
 
         $locationProvider.html5Mode(true).hashPrefix('!');
 
@@ -15,6 +15,8 @@ angular.module('koruk',[
 		}).when('/404', {
 			templateUrl: 'views/404.html'
 		}).otherwise({redirectTo: '/404'});
+
+		hammerDefaultOptsProvider.set({recognizers: [[Hammer.Swipe, {time: 250}]] });
 	}])
 	.controller('bodyController',[
 		'$scope',
@@ -65,12 +67,32 @@ angular.module('koruk',[
 				{'image':'/collection/item33.jpg','cost':'0,00 TL','text':'Dress Name'}
 			];
 
-			$scope.selectedItem=$scope.itemList[0];
-			$scope.galleryLeft=400;
+			$scope.selectedItemIndex=0;
+			$scope.selectedItem=$scope.itemList[$scope.selectedItemIndex];
+			var leftmargin=400;
+			if(window.innerWidth<768) leftmargin=75;
 
-			$scope.selectThis=function(item,index){
-				$scope.selectedItem=item;
-				$scope.galleryLeft=-parseInt(index*200)+400;
+			$scope.galleryLeft=leftmargin;
+
+			$scope.selectThis=function(index){
+				$scope.selectedItemIndex=index;
+				$scope.selectedItem=$scope.itemList[$scope.selectedItemIndex];;
+				$scope.galleryLeft=-parseInt(index*200)+leftmargin;
+			}
+
+			
+
+			$scope.swipeAction=function(event){
+				switch(event.direction){
+					case 2:
+						if($scope.selectedItemIndex>$scope.itemList.length) return;
+						$scope.selectThis($scope.selectedItemIndex+1);
+						break;
+					case 4:
+						if($scope.selectedItemIndex==0) return;
+						$scope.selectThis($scope.selectedItemIndex-1);
+						break;
+				}
 			}
 		}
 	]);

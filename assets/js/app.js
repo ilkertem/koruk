@@ -6,12 +6,39 @@ angular.module('koruk',[
         $locationProvider.html5Mode(true).hashPrefix('!');
 
   		$routeProvider.when('/', {
-			templateUrl: 'views/anasayfa.html?v20170326'
-		}).when('/koleksiyon', {
-			templateUrl: 'views/koleksiyon.html?v20170326',
-			controller:'collectionController'
+			templateUrl: 'views/anasayfa.html?v20180328'
+		}).when('/moda', {
+			templateUrl: 'views/article.html?v20180328',
+			controller:'articleController'
+		}).when('/xl-moda', {
+			templateUrl: 'views/article.html?v20180328',
+			controller:'articleController'
+		}).when('/yazilar', {
+			templateUrl: 'views/article.html?v20180328',
+			controller:'articleController'
+		}).when('/magazin', {
+			templateUrl: 'views/article.html?v20180328',
+			controller:'articleController'
+		}).when('/zor-begenen-adam', {
+			templateUrl: 'views/article.html?v20180328',
+			controller:'articleController'
+		}).when('/moda/:content', {
+			templateUrl: 'views/article.html?v20180328',
+			controller:'articleController'
+		}).when('/xl-moda/:content', {
+			templateUrl: 'views/article.html?v20180328',
+			controller:'articleController'
+		}).when('/yazilar/:content', {
+			templateUrl: 'views/article.html?v20180328',
+			controller:'articleController'
+		}).when('/magazin/:content', {
+			templateUrl: 'views/article.html?v20180328',
+			controller:'articleController'
+		}).when('/zor-begenen-adam/:content', {
+			templateUrl: 'views/article.html?v20180328',
+			controller:'articleController'
 		}).when('/iletisim', {
-			templateUrl: 'views/iletisim.html?v20170327'
+			templateUrl: 'views/iletisim.html?v20180328'
 		}).when('/404', {
 			templateUrl: 'views/404.html'
 		}).otherwise({redirectTo: '/404'});
@@ -21,49 +48,44 @@ angular.module('koruk',[
 	.controller('bodyController',[
 		'$scope',
 		'$location',
-		function($scope,$location){
+		'$rootScope',
+		function($scope,$location,$rootScope){
 			console.log('bodyController');
 			$scope.gotoPage=function(url){
 				$location.url(url);
 			}
+			$scope.toggleMenu=function(){
+				if($scope.showMobileMenu) $scope.showMobileMenu=false;
+				else $scope.showMobileMenu=true;
+			}
+			$rootScope.$on("$locationChangeStart", function(event, next, current) { 
+		        $scope.showMobileMenu=false; 
+		    });
+		}
+	]).controller('articleController',[
+		'$scope',
+		'$routeParams',
+		'$location',
+		function($scope,$routeParams,$location){
+			console.log('articleController');
+			$scope.gotoPage=function(url){
+				$location.url(url);
+			}
+			var category=$location.$$path;
+			var content=$routeParams.content;
+			if($routeParams.content){
+				$scope.includeThis='/views/articles/'+content+'.html';
+			}else{
+				$scope.includeThis='/views/articles'+category+'-list.html';
+			}
+			
 		}
 	]).controller('collectionController',[
 		'$scope',
 		function($scope){
 			console.log('collectionController');
 			$scope.itemList=[
-				{'image':'/collection/item1.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item2.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item3.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item4.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item5.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item6.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item7.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item8.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item9.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item10.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item11.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item12.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item13.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item14.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item15.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item16.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item17.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item18.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item19.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item20.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item21.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item22.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item23.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item24.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item25.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item26.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item27.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item28.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item29.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item30.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item31.jpg','cost':'0,00 TL','text':'Dress Name'},
-				{'image':'/collection/item32.jpg','cost':'0,00 TL','text':'Dress Name'}
+				{'image':'/collection/item1.jpg','cost':'0,00 TL','text':'Dress Name'}
 			];
 
 			$scope.selectedItemIndex=0;
